@@ -12,10 +12,6 @@ Bespot Android SDK offers indoor location tracking and analytics reporting to 3r
 - [ ] Outdoor location
 - [ ] Analytics
 
-## Requirements
-
-// TODO
-
 ## Installation
 
 Add the Bespot Artifactory repository to your root `build.gradle`.
