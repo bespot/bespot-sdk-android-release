@@ -52,15 +52,15 @@ The Bespot SDK requires three permissions. It needs permission for [Fine Locatio
 In order to receive indoor location changes you need to subscribe to `Bespot.subscribe`. This will return a 'StatusResult' object with the status of the device.
 
 ```kotlin
-Bespot.subscribe(location, object : StatusObserver {
-        override fun onStatusError(error: StatusError) {
+Bespot.subscribe(location, object: StatusObserver {
+    override fun onStatusUpdate(status: StatusResult) {
+        // Handle new status
+    }
 
-            }
-
-        override fun onStatusUpdate(status: StatusResult) {
-
-                    }
-        })
+    override fun onStatusError(error: StatusError) {
+        // Handle error
+    }
+})
 ```
 
 For the unsubscribe procedure use the `Bespot.unsubscribe`
@@ -70,7 +70,7 @@ For the unsubscribe procedure use the `Bespot.unsubscribe`
 When the last status of the device is needed, you can retreive it by calling the `Bespot.lastStatus`. This will return a `StatusResult` object.
 
 ```kotlin
-Bespot.lastStatus { statusResult, statusError ->  }
+Bespot.lastStatus { statusResult, statusError ->  ... }
 ```
 
 ## Support
