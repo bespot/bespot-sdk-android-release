@@ -19,13 +19,7 @@ Add the Bespot Artifactory repository to your root `build.gradle`.
 ```gradle
 allprojects {
     repositories {
-        maven {
-            url 'https://bespot.jfrog.io/artifactory/bespot-sdk-android/'
-            credentials {
-                username = '${your_username}'
-                password = '${your_password}'
-            }
-        }
+        maven {url 'https://bespot.jfrog.io/artifactory/bespot-sdk-android/'}
     }
 }
 ```
