@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Bespot SDK Android</string>
+    <string name="permission_prompt_title">Allow permissions?</string>
+    <string name="permission_prompt_rationale">Access to your Location and Bluetooth is required if you want to play!</string>
+</resources>
