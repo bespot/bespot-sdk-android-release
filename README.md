@@ -75,7 +75,7 @@ Bespot.lastStatus { statusResult, statusError ->  }
 
 ## Support
 
-// TODO
+If you find a bug please fill out an [issue report](https://gitlab.com/bespot/bespot-sdk-android-release/-/issues) or contact us at [dev@bespot.me](dev@bespot.me)
 
 ## License
 
