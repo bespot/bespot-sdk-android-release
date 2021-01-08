@@ -65,7 +65,7 @@ Bespot.subscribe(location, object : StatusObserver {
 
                     }
         })
-        ```
+```
 
 For the unsubscribe procedure use the 'Bespot.unsubscribe'
 
