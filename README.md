@@ -67,6 +67,38 @@ When the last status of the device is needed, you can retreive it by calling the
 Bespot.lastStatus { statusResult, statusError ->  ... }
 ```
 
+#### Request for stores
+
+To receive the available stores, call the `Bestpo.getStores`.
+
+```kotlin
+Bespot.getStores(object : StoresCallback {
+                override fun onStoreReceived(stores: List<Store>) {
+                     // Handle available stores
+                }
+
+                override fun onError(error: Failure) {
+                    // Handle error
+                }
+            })
+``` 
+
+#### Request for store information
+
+You can request for information about a store by using the `Bespot.getStore` method and passing the `store_id`.
+
+```kotlin
+Bespot.getStore("store_id", object : StoreCallback {
+                override fun onStoreReceived(stores: Store) {
+                     // Handle new store details
+                }
+
+                override fun onError(error: Failure) {
+                    // Handle error
+                }
+            })
+``` 
+
 ## Support
 
 If you find a bug please fill out an [issue report](https://gitlab.com/bespot/bespot-sdk-android-release/-/issues) or contact us at [dev@bespot.me](dev@bespot.me)
