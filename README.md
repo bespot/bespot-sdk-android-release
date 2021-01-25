@@ -72,7 +72,7 @@ Bespot.lastStatus { statusResult, statusError ->  ... }
 To receive the available stores, call the `Bestpo.getStores`.
 
 ```kotlin
-Bespot.getStores(object : StoresCallback {
+Bespot.getStores(object: StoresCallback {
                 override fun onStoreReceived(stores: List<Store>) {
                      // Handle available stores
                 }
@@ -88,9 +88,9 @@ Bespot.getStores(object : StoresCallback {
 You can request for information about a store by using the `Bespot.getStore` method and passing the `store_id`.
 
 ```kotlin
-Bespot.getStore("store_id", object : StoreCallback {
+Bespot.getStore("store_id", object: StoreCallback {
                 override fun onStoreReceived(stores: Store) {
-                     // Handle new store details
+                     // Handle store details
                 }
 
                 override fun onError(error: Failure) {
