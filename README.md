@@ -38,6 +38,11 @@ First initialise Bespot SDK with the provided **App Id** and **App Secret**
 ```kotlin
 Bespot.init(this, "your_app_id", "your_secret")
 ```
+or via sample project's `build.gradle` file
+```kotlin
+buildConfigField("String", "BESPOT_APP_ID", "\"$BESPOT_APP_ID\"")
+buildConfigField("String", "BESPOT_APP_SECRET", "\"$BESPOT_APP_SECRET\"")
+```
 
 The Bespot SDK requires three permissions. It needs permission for [Fine Location](https://developer.android.com/reference/android/Manifest.permission#ACCESS_FINE_LOCATION), for [Bluetooth](https://developer.android.com/reference/android/Manifest.permission#BLUETOOTH) and for [Bluetooth Admin](https://developer.android.com/reference/android/Manifest.permission#BLUETOOTH_ADMIN). 
 
@@ -64,7 +69,16 @@ For the unsubscribe procedure use the `Bespot.unsubscribe`
 When the last status of the device is needed, you can retreive it by calling the `Bespot.lastStatus`. This will return a `StatusResult` object.
 
 ```kotlin
-Bespot.lastStatus { statusResult, statusError ->  ... }
+Bespot.lastStatus(object: StatusObserver {
+                override fun onStatusUpdate(status: StatusResult) {
+                    // Handle status
+                }
+
+                override fun onError(error: Failure) {
+                   // Handle error
+                }
+                
+            })
 ```
 
 #### Request for stores
@@ -89,7 +103,7 @@ You can request for information about a store by using the `Bespot.getStore` met
 
 ```kotlin
 Bespot.getStore("store_id", object: StoreCallback {
-                override fun onStoreReceived(stores: Store) {
+                override fun onStoreReceived(store: Store) {
                      // Handle store details
                 }
 
