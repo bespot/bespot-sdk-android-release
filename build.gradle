@@ -20,10 +20,6 @@ allprojects {
         jcenter()
         maven {
             url 'https://bespot.jfrog.io/artifactory/bespot-sdk-android/'
-            credentials {
-                username = 'opap_dev'
-                password = 'rGRICRD84gHp'
-            }
         }
     }
 }
