@@ -1,16 +1,11 @@
 package com.bespot.sample
 
 import android.Manifest.permission.*
-import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bespot.sample.databinding.ActivityMainBinding
-import com.bespot.sdk.Bespot
-import com.bespot.sdk.StatusObserver
-import com.bespot.sdk.StatusResult
-import com.bespot.sdk.common.Failure
+import com.bespot.sdk.sample.R
+import com.bespot.sdk.sample.databinding.ActivityMainBinding
 import com.qifan.powerpermission.coroutines.awaitAskPermissionsAllGranted
 import com.qifan.powerpermission.rationale.createDialogRationale
 import kotlinx.coroutines.CoroutineScope
@@ -18,11 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class MainActivity : AppCompatActivity(), StatusObserver {
-
-    companion object {
-        const val TAG = "MainActivity"
-    }
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -31,11 +22,12 @@ class MainActivity : AppCompatActivity(), StatusObserver {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.permission.setOnClickListener {
+        // Setup subscribe/unsubscribe button
+        binding.startSession.setOnClickListener {
             // Get location permission
             CoroutineScope(Dispatchers.Main).launch {
                 val hasPermission = awaitAskPermissionsAllGranted(
-                    permissions = *arrayOf(ACCESS_FINE_LOCATION, BLUETOOTH, BLUETOOTH_ADMIN),
+                    permissions = arrayOf(ACCESS_FINE_LOCATION, BLUETOOTH, BLUETOOTH_ADMIN),
                     rationaleDelegate = createDialogRationale(
                         R.string.permission_prompt_title,
                         listOf(ACCESS_FINE_LOCATION, BLUETOOTH, BLUETOOTH_ADMIN),
@@ -43,29 +35,14 @@ class MainActivity : AppCompatActivity(), StatusObserver {
                     )
                 )
 
-                binding.toggle.isEnabled = hasPermission
+                if (hasPermission) {
+                    //SessionActivity.start(this@MainActivity, STORE)
+                    StoreSelectionActivity.start(this@MainActivity)
+                } else {
+                    Toast.makeText(this@MainActivity, "Permissions denied!", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
-
-        binding.toggle.addOnButtonCheckedListener { _, checkedId, _ ->
-            if (checkedId == R.id.subscribe) {
-                val location = Location("")
-                location.latitude = 37.99
-                location.longitude = 23.70
-                Bespot.subscribe(location, this)
-            } else {
-                Bespot.unsubscribe()
-            }
-        }
-
-        Log.d(TAG, "Main Activity was created")
-    }
-
-    override fun onStatusUpdate(status: StatusResult) {
-        Toast.makeText(this, status.status.name, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onError(error: Failure) {
-        Log.d("Sample App", "Error type: $error")
     }
 }

@@ -1,54 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/app_title"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        tools:text="App Name" />
+        android:orientation="vertical"
+        app:elevation="8dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/permission"
-        android:layout_marginTop="16dp"
-        style="@style/Widget.MaterialComponents.Button"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/colorOnPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Request permission" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggle"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:enabled="false"
-        android:orientation="horizontal"
-        app:checkedButton="@id/unsubscribe">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click to choose a nearby store and start a new session"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/subscribe"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
+            android:id="@+id/startSession"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Subscribe" />
+            android:layout_marginTop="16dp"
+            android:text="START SESSION" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/unsubscribe"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Unsubscribe" />
+    </LinearLayout>
 
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
