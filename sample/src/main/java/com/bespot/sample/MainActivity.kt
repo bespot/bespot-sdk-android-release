@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bespot.sample.databinding.ActivityMainBinding
 import com.bespot.sdk.Bespot
-import com.bespot.sdk.StatusError
 import com.bespot.sdk.StatusObserver
 import com.bespot.sdk.StatusResult
+import com.bespot.sdk.common.Failure
 import com.qifan.powerpermission.coroutines.awaitAskPermissionsAllGranted
 import com.qifan.powerpermission.rationale.createDialogRationale
 import kotlinx.coroutines.CoroutineScope
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), StatusObserver {
         Toast.makeText(this, status.status.name, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onStatusError(error: StatusError) {
-        Log.e(TAG, "Status error: ${error.errorCode}")
+    override fun onError(error: Failure) {
+        Log.d("Sample App", "Error type: $error")
     }
 }
