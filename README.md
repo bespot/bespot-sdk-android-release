@@ -1,6 +1,6 @@
 # Bespot Android SDK
 
-[![VERSION](https://img.shields.io/badge/VERSION-0.0.2-green)](#)
+[![VERSION](https://img.shields.io/badge/VERSION-0.2.2-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
 Bespot Android SDK offers indoor location tracking and analytics reporting to 3rd party apps using BLE technology and Machine Learning.
@@ -51,7 +51,7 @@ Bespot.subscribe(location, object: StatusObserver {
         // Handle new status
     }
 
-    override fun onStatusError(error: StatusError) {
+    override fun onError(error: Failure) {
         // Handle error
     }
 })
