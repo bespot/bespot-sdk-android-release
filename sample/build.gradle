@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-    implementation "com.bespot:library:0.2.2"
+    implementation "com.bespot:library:0.2.3"
 
     // Android Jetpack libraries
     implementation "androidx.appcompat:appcompat:1.2.0"

@@ -8,6 +8,7 @@ import com.bespot.sdk.StatusObserver
 import com.bespot.sdk.StatusResult
 import com.bespot.sdk.Store
 import com.bespot.sdk.common.Failure
+import com.bespot.sdk.common.StatusFailure
 import timber.log.Timber
 import java.util.*
 
@@ -45,8 +46,8 @@ class SessionViewModel : ViewModel(), StatusObserver {
     }
 
     override fun onError(error: Failure) {
-        Timber.d("Error $error")
         handleStatus(StatusWrapper.error(error))
+        Timber.d("Error $error")
     }
 
     private fun handleStatus(status: StatusWrapper) {

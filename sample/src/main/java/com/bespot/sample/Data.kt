@@ -5,6 +5,7 @@ import com.bespot.sdk.Status
 import com.bespot.sdk.StatusResult
 import com.bespot.sdk.Store
 import com.bespot.sdk.common.Failure
+import com.bespot.sdk.common.StatusFailure
 import java.util.*
 
 enum class InOutStatus {
@@ -24,13 +25,13 @@ data class StatusWrapper(
                 Status.AWAY -> InOutStatus.OUTSIDE
                 else -> InOutStatus.UNKNOWN
             },
-            description = "", // TODO Add description
+            description = "Resolved EIDs: ${result.eids.size}",
             timestamp = result.timestamp
         )
 
         fun error(error: Failure): StatusWrapper = StatusWrapper(
             status = InOutStatus.ERROR,
-            description = error.toString(),
+            description = error.toText(),
             timestamp = Date().time
         )
     }
@@ -66,5 +67,18 @@ data class StoreWrapper(
                 "%.0f m".format(distance)
             }
         }
+    }
+}
+
+fun Failure.toText(): String {
+    return when (this) {
+        StatusFailure.NoConfigurationFound -> "No Configuration Found"
+        StatusFailure.NoStoreReadings -> "No Store Readings"
+        StatusFailure.CloseDistance -> "Close Distance"
+        StatusFailure.IndoorDataModelNotFound -> "Indoor data model Not found"
+        Failure.PermissionDenied -> "Permission Denied"
+        Failure.NetworkConnection -> "Connection error"
+        Failure.ServerError -> "Remote server error"
+        else -> "Unmapped error: $this"
     }
 }
