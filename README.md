@@ -3,6 +3,8 @@
 [![VERSION](https://img.shields.io/badge/VERSION-0.2.3-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
+<img src="screenshots/sample.png" width="300" align="right" hspace="20">
+
 Bespot Android SDK offers indoor location tracking and analytics reporting to 3rd party apps using BLE technology and Machine Learning.
 
 ## Features
