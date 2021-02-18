@@ -1,6 +1,6 @@
 # Bespot Android SDK
 
-[![VERSION](https://img.shields.io/badge/VERSION-0.2.3-green)](#)
+[![VERSION](https://img.shields.io/badge/VERSION-0.3.0-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
 <img src="screenshots/sample.png" width="300" align="right" hspace="20">
@@ -46,14 +46,14 @@ buildConfigField("String", "BESPOT_APP_ID", "\"$BESPOT_APP_ID\"")
 buildConfigField("String", "BESPOT_APP_SECRET", "\"$BESPOT_APP_SECRET\"")
 ```
 
-The Bespot SDK requires three permissions. It needs permission for [Fine Location](https://developer.android.com/reference/android/Manifest.permission#ACCESS_FINE_LOCATION), for [Bluetooth](https://developer.android.com/reference/android/Manifest.permission#BLUETOOTH) and for [Bluetooth Admin](https://developer.android.com/reference/android/Manifest.permission#BLUETOOTH_ADMIN). 
+The Bespot SDK requires three permissions. It needs permission for [Fine Location](https://developer.android.com/reference/android/Manifest.permission#ACCESS_FINE_LOCATION), for [Bluetooth](https://developer.android.com/reference/android/Manifest.permission#BLUETOOTH) and for [Bluetooth Admin](https://developer.android.com/reference/android/Manifest.permission#BLUETOOTH_ADMIN).
 
 #### Subscribe for indoor location events
 
 In order to receive indoor location changes you need to subscribe to `Bespot.subscribe`. This will return a 'StatusResult' object with the status of the device.
 
 ```kotlin
-Bespot.subscribe(location, object: StatusObserver {
+Bespot.subscribe(object: StatusObserver {
     override fun onStatusUpdate(status: StatusResult) {
         // Handle new status
     }
@@ -79,7 +79,7 @@ Bespot.lastStatus(object: StatusObserver {
                 override fun onError(error: Failure) {
                    // Handle error
                 }
-                
+
             })
 ```
 
@@ -97,7 +97,7 @@ Bespot.getStores(object: StoresCallback {
                     // Handle error
                 }
             })
-``` 
+```
 
 #### Request for store information
 
@@ -113,7 +113,7 @@ Bespot.getStore("store_id", object: StoreCallback {
                     // Handle error
                 }
             })
-``` 
+```
 
 ## Support
 

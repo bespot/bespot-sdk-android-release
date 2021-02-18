@@ -6,10 +6,10 @@ import com.bespot.sdk.StatusResult
 import com.bespot.sdk.Store
 import com.bespot.sdk.common.Failure
 import com.bespot.sdk.common.StatusFailure
-import java.util.*
+import java.util.Date
 
 enum class InOutStatus {
-    INSIDE, OUTSIDE, UNKNOWN, ERROR
+    INSIDE, OUTSIDE, UNVERIFIED, ERROR
 }
 
 data class StatusWrapper(
@@ -23,7 +23,7 @@ data class StatusWrapper(
                 Status.IN -> InOutStatus.INSIDE
                 Status.OUT -> InOutStatus.OUTSIDE
                 Status.AWAY -> InOutStatus.OUTSIDE
-                else -> InOutStatus.UNKNOWN
+                else -> InOutStatus.UNVERIFIED
             },
             description = "Resolved EIDs: ${result.eids.size}",
             timestamp = result.timestamp
@@ -76,8 +76,11 @@ fun Failure.toText(): String {
         StatusFailure.NoStoreReadings -> "No Store Readings"
         StatusFailure.CloseDistance -> "Close Distance"
         StatusFailure.IndoorDataModelNotFound -> "Indoor data model Not found"
-        Failure.PermissionDenied -> "Permission Denied"
+        Failure.BluetoothPermissionDenied -> "Bluetooth Permission Denied"
+        Failure.BluetoothDisabled -> "Bluetooth Disabled"
+        Failure.LocationPermissionDenied -> "Location Permission Denied"
         Failure.NetworkConnection -> "Connection error"
+        Failure.NotInitialized -> "SDK isn't initialized"
         Failure.ServerError -> "Remote server error"
         else -> "Unmapped error: $this"
     }

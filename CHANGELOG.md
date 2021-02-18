@@ -1,3 +1,11 @@
+# 0.3.0 (2021-02-18)
+### Added
+- New error types for store detection.
+### Changed
+- Location is now optional in subscribe().
+- Removed the UNKNOWN and added the UNVERIFIED status value.
+### Fixed
+- Verified Status.
 # 0.2.3 (2021-02-05)
 ### Added
 - Implementation of lastStatus().

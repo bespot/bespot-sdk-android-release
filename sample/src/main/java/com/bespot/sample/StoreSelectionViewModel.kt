@@ -14,7 +14,6 @@ import com.bespot.sdk.Bespot
 import com.bespot.sdk.Store
 import com.bespot.sdk.StoresCallback
 import com.bespot.sdk.common.Failure
-import com.bespot.sdk.common.StoreFailure
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +23,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 class StoreSelectionViewModel : ViewModel() {
-    
+
     private val stores = MutableLiveData<List<StoreWrapper>>().apply {
         value = arrayListOf()
     }

@@ -8,9 +8,8 @@ import com.bespot.sdk.StatusObserver
 import com.bespot.sdk.StatusResult
 import com.bespot.sdk.Store
 import com.bespot.sdk.common.Failure
-import com.bespot.sdk.common.StatusFailure
 import timber.log.Timber
-import java.util.*
+import java.util.Date
 
 class SessionViewModel : ViewModel(), StatusObserver {
 
@@ -25,13 +24,17 @@ class SessionViewModel : ViewModel(), StatusObserver {
     fun statusList(): MutableLiveData<List<StatusWrapper>> = statusList
 
     private val lastStatus = MutableLiveData<StatusWrapper>().apply {
-        value = StatusWrapper(InOutStatus.UNKNOWN, "", Date().time)
+        value = StatusWrapper(InOutStatus.UNVERIFIED, "", Date().time)
     }
 
     fun lastStatus(): LiveData<StatusWrapper> = lastStatus
 
-    fun subscribe(store: Store) {
-        Bespot.subscribe(store.location(), this)
+    fun subscribe(store: Store = Store.empty()) {
+        if (store == Store.empty()) {
+            Bespot.subscribe(this)
+        } else {
+            Bespot.subscribe(this, store.location())
+        }
         isSubscribed.postValue(true)
     }
 

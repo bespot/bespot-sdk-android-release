@@ -36,49 +36,63 @@ class SessionActivity : AppCompatActivity() {
 
         // Setup toolbar
         store = requireNotNull(intent.getParcelableExtra(ARG_STORE))
-        binding.toolbar.title = store.name
-        binding.toolbar.subtitle = store.uuid
+        if (store != Store.empty()) {
+            binding.toolbar.title = store.name
+            binding.toolbar.subtitle = store.uuid
+        } else {
+            binding.toolbar.title = getString(R.string.no_store_mode)
+        }
+
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
         // Setup latest status
-        model.lastStatus().observe(this, {
-            binding.lastStatus.text = it.status.name
-            when (it.status) {
-                InOutStatus.INSIDE -> {
-                    binding.lastStatus.setChipBackgroundColorResource(R.color.status_in)
-                    binding.lastStatus.setChipIconResource(R.drawable.ic_status_in)
-                }
-                InOutStatus.OUTSIDE -> {
-                    binding.lastStatus.setChipBackgroundColorResource(R.color.status_out)
-                    binding.lastStatus.setChipIconResource(R.drawable.ic_status_out)
-                }
-                InOutStatus.ERROR -> {
-                    binding.lastStatus.setChipBackgroundColorResource(R.color.status_error)
-                    binding.lastStatus.setChipIconResource(R.drawable.ic_status_error)
-                }
-                else -> {
-                    binding.lastStatus.setChipBackgroundColorResource(R.color.status_unknown)
-                    binding.lastStatus.setChipIconResource(R.drawable.ic_status_unknown)
+        model.lastStatus().observe(
+            this,
+            {
+                binding.lastStatus.text = it.status.name
+                when (it.status) {
+                    InOutStatus.INSIDE -> {
+                        binding.lastStatus.setChipBackgroundColorResource(R.color.status_in)
+                        binding.lastStatus.setChipIconResource(R.drawable.ic_status_in)
+                    }
+                    InOutStatus.OUTSIDE -> {
+                        binding.lastStatus.setChipBackgroundColorResource(R.color.status_out)
+                        binding.lastStatus.setChipIconResource(R.drawable.ic_status_out)
+                    }
+                    InOutStatus.ERROR -> {
+                        binding.lastStatus.setChipBackgroundColorResource(R.color.status_error)
+                        binding.lastStatus.setChipIconResource(R.drawable.ic_status_error)
+                    }
+                    else -> {
+                        binding.lastStatus.setChipBackgroundColorResource(R.color.status_unknown)
+                        binding.lastStatus.setChipIconResource(R.drawable.ic_status_unknown)
+                    }
                 }
             }
-        })
+        )
 
         // Setup status list
         adapter = StatusListAdapter()
         binding.list.adapter = adapter
-        model.statusList().observe(this, {
-            adapter.submitList(it)
-            adapter.notifyDataSetChanged()
-            binding.list.postDelayed({ binding.list.scrollToPosition(adapter.itemCount - 1) }, 10)
-        })
+        model.statusList().observe(
+            this,
+            {
+                adapter.submitList(it)
+                adapter.notifyDataSetChanged()
+                binding.list.postDelayed({ binding.list.scrollToPosition(adapter.itemCount - 1) }, 10)
+            }
+        )
 
         // Setup subscribe/unsubscribe button
         binding.subscribe.setOnClickListener { model.subscribe(store) }
         binding.unsubscribe.setOnClickListener { model.unsubscribe() }
-        model.isSubscribed().observe(this, {
-            binding.subscribe.visibility = if (it) View.GONE else View.VISIBLE
-            binding.unsubscribe.visibility = if (it) View.VISIBLE else View.GONE
-        })
+        model.isSubscribed().observe(
+            this,
+            {
+                binding.subscribe.visibility = if (it) View.GONE else View.VISIBLE
+                binding.unsubscribe.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        )
     }
 
     override fun onDestroy() {

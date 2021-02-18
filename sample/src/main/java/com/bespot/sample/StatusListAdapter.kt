@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bespot.sdk.sample.R
 import com.bespot.sdk.sample.databinding.ListItemStatusBinding
 import java.text.DateFormat
-import java.util.*
+import java.util.Date
 
 class StatusListAdapter :
     ListAdapter<StatusWrapper, StatusListAdapter.StatusViewHolder>(StatusDiffCallback()) {
