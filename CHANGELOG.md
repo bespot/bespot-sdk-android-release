@@ -1,3 +1,6 @@
+# 0.3.1 (2021-02-26)
+### Added
+- The store's code (storeCode) in the StatusResult model.
 # 0.3.0 (2021-02-18)
 ### Added
 - New error types for store detection.
