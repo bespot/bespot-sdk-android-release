@@ -123,7 +123,7 @@ You can add a user unique Identifier to keep track the user's session.
 Bespot.setUserID("user_id")
 ```
 
-## Failures
+#### Failures
 
 Every `Observer` or `Callback` class has an `onError(error: Failure)` callback method that retreives an `Failure` object.
 Check the error type by using the below structure:
