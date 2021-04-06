@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
             if (hasPermission) {
                 if (noSessionMode) {
-                    SessionActivity.start(this@MainActivity, Store.empty())
+                    SessionActivity.start(this@MainActivity, null)
                 } else {
                     StoreSelectionActivity.start(this@MainActivity)
                 }

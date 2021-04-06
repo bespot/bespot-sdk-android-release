@@ -15,7 +15,7 @@ class SessionActivity : AppCompatActivity() {
     companion object {
         private const val ARG_STORE = "store"
 
-        fun start(context: Context, store: Store) {
+        fun start(context: Context, store: Store? = null) {
             val intent = Intent(context, SessionActivity::class.java)
                 .putExtra(ARG_STORE, store)
                 .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -24,7 +24,7 @@ class SessionActivity : AppCompatActivity() {
     }
 
     private lateinit var model: SessionViewModel
-    private lateinit var store: Store
+    private var store: Store? = null
     private lateinit var binding: ActivitySessionBinding
     private lateinit var adapter: StatusListAdapter
 
@@ -33,23 +33,18 @@ class SessionActivity : AppCompatActivity() {
         model = ViewModelProvider(this).get(SessionViewModel::class.java)
         binding = ActivitySessionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        store = intent.getParcelableExtra(ARG_STORE)
+        setTitle()
 
         // Setup toolbar
-        store = requireNotNull(intent.getParcelableExtra(ARG_STORE))
-        if (store != Store.empty()) {
-            binding.toolbar.title = store.name
-            binding.toolbar.subtitle = store.uuid
-        } else {
-            binding.toolbar.title = getString(R.string.no_store_mode)
-        }
-
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
         // Setup latest status
         model.lastStatus().observe(
             this,
             {
-                binding.lastStatus.text = it.status.name
+                binding.lastStatus.text =
+                    if (it.status == InOutStatus.UNVERIFIED) getString(R.string.status_calculating) else it.status.name
                 when (it.status) {
                     InOutStatus.INSIDE -> {
                         binding.lastStatus.setChipBackgroundColorResource(R.color.status_in)
@@ -64,7 +59,7 @@ class SessionActivity : AppCompatActivity() {
                         binding.lastStatus.setChipIconResource(R.drawable.ic_status_error)
                     }
                     else -> {
-                        binding.lastStatus.setChipBackgroundColorResource(R.color.status_unknown)
+                        // binding.lastStatus.setChipBackgroundColorResource(R.color.status_unknown)
                         binding.lastStatus.setChipIconResource(R.drawable.ic_status_unknown)
                     }
                 }
@@ -79,7 +74,10 @@ class SessionActivity : AppCompatActivity() {
             {
                 adapter.submitList(it)
                 adapter.notifyDataSetChanged()
-                binding.list.postDelayed({ binding.list.scrollToPosition(adapter.itemCount - 1) }, 10)
+                binding.list.postDelayed(
+                    { binding.list.scrollToPosition(adapter.itemCount - 1) },
+                    10
+                )
             }
         )
 
@@ -93,6 +91,15 @@ class SessionActivity : AppCompatActivity() {
                 binding.unsubscribe.visibility = if (it) View.VISIBLE else View.GONE
             }
         )
+    }
+
+    private fun setTitle() {
+        store?.let {
+            binding.toolbar.title = it.name
+            binding.toolbar.subtitle = it.uuid
+        } ?: run {
+            binding.toolbar.title = getString(R.string.no_store_mode)
+        }
     }
 
     override fun onDestroy() {

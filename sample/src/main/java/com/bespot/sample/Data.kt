@@ -72,16 +72,16 @@ data class StoreWrapper(
 
 fun Failure.toText(): String {
     return when (this) {
-        StatusFailure.NoConfigurationFound -> "No Configuration Found"
-        StatusFailure.NoStoreReadings -> "No Store Readings"
-        StatusFailure.CloseDistance -> "Close Distance"
-        StatusFailure.IndoorDataModelNotFound -> "Indoor data model Not found"
-        Failure.BluetoothPermissionDenied -> "Bluetooth Permission Denied"
-        Failure.BluetoothDisabled -> "Bluetooth Disabled"
-        Failure.LocationPermissionDenied -> "Location Permission Denied"
-        Failure.NetworkConnection -> "Connection error"
-        Failure.NotInitialized -> "SDK isn't initialized"
-        Failure.ServerError -> "Remote server error"
+        is StatusFailure.NoConfigurationFound -> "No Configuration Found"
+        is StatusFailure.NoStoreReadings -> "No Store Readings"
+        is StatusFailure.CloseDistance -> "Close Distance"
+        is StatusFailure.IndoorDataModelNotFound -> "Indoor data model Not found"
+        is Failure.BluetoothPermissionDenied -> "Bluetooth Permission Denied"
+        is Failure.BluetoothDisabled -> "Bluetooth Disabled"
+        is Failure.LocationPermissionDenied -> "Location Permission Denied"
+        is Failure.NetworkConnection -> "Connection error"
+        is Failure.NotInitialized -> "SDK isn't initialized"
+        is Failure.ServerError -> "Remote server error"
         else -> "Unmapped error: $this"
     }
 }

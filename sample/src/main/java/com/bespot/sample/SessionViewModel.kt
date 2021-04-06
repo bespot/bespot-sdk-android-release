@@ -29,12 +29,11 @@ class SessionViewModel : ViewModel(), StatusObserver {
 
     fun lastStatus(): LiveData<StatusWrapper> = lastStatus
 
-    fun subscribe(store: Store = Store.empty()) {
-        if (store == Store.empty()) {
-            Bespot.subscribe(this)
-        } else {
+    fun subscribe(store: Store? = null) {
+        store?.let {
             Bespot.subscribe(this, store.location())
-        }
+        } ?: Bespot.subscribe(this, null)
+
         isSubscribed.postValue(true)
     }
 

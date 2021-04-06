@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Bespot SDK Android</string>
+    <string name="status_waiting">Waiting for readings…</string>
+    <string name="status_calculating">Calculating…</string>
     <string name="permission_prompt_title">Allow permissions?</string>
     <string name="permission_prompt_rationale">Access to your Location and Bluetooth is required if you want to play!</string>
     <string name="no_store_mode">No Store Mode</string>

@@ -16,7 +16,7 @@ class BespotSampleApp : Application() {
         }
 
         // Init Bespot SDK with the provided App Id and App Secret
-        Bespot.init(this, BuildConfig.BESPOT_APP_ID, BuildConfig.BESPOT_APP_SECRET)
+        Bespot.init(this, BuildConfig.BESPOT_APP_ID, BuildConfig.BESPOT_APP_SECRET, null)
 
         // Enable Bespot SDK logs in DEBUG mode only
         Bespot.setLogsEnabled(BuildConfig.DEBUG)
