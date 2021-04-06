@@ -1,3 +1,9 @@
+# 0.3.2 (2021-04-06)
+### Added
+- Set user identifier.
+### Fixed
+- JWT refresh token fixed.
+- Various fixes
 # 0.3.1 (2021-02-26)
 ### Added
 - The store's code (storeCode) in the StatusResult model.
