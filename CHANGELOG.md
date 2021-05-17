@@ -1,9 +1,26 @@
+# 0.3.3 (2021-05-17)
+### Added
+- Extra data added in beacon readings payloads to allow remote signal adjustments for different device types.
+- Javadocs and Sources are included with the artifacts.
+- Extended device info in headers.
+### Fixed
+- Minor internal fixes.
 # 0.3.2 (2021-04-06)
 ### Added
+- New configurations in SDK initialization. 
+- Beacon scanning method *access granted based on init config.
+- Change between Verified (production), Experimental and Raw INOUT implementation *access granted based on init config.
+- Remote logging supported.
+- Internal installation ID integrated.
 - Set user identifier.
+- Full obfuscated build.
+- User Agent header.
+- Accept-Language header.
+- X-DeviceId & X-UserId headers.
+### Changed
+- Removed onDiscover callbacks from koktakt.io.
 ### Fixed
 - JWT refresh token fixed.
-- Various fixes
 # 0.3.1 (2021-02-26)
 ### Added
 - The store's code (storeCode) in the StatusResult model.
