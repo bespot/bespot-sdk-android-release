@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_last_status"
+        android:icon="@drawable/ic_status_unknown"
+        android:title="Get last Status"
+        app:showAsAction="ifRoom" />
+</menu>

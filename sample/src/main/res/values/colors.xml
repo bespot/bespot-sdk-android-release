@@ -10,11 +10,17 @@
 
     <color name="ic_launcher_background">#FF2962</color>
 
+    <color name="feedback_positive">#00c853</color>
+    <color name="feedback_negative">#ff1744</color>
+
     <color name="status_in">#00c853</color>
     <color name="status_out">#ff1744</color>
     <color name="status_unknown">#9e9e9e</color>
     <color name="status_error">#fdd835</color>
 
-    <color name="feedback_positive">#00c853</color>
-    <color name="feedback_negative">#ff1744</color>
+    <color name="buffing_readings">#ff1744</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="grey">#aaaaaa</color>
 </resources>

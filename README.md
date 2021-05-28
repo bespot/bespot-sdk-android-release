@@ -1,6 +1,6 @@
 # Bespot Android SDK
 
-[![VERSION](https://img.shields.io/badge/VERSION-0.3.3-green)](#)
+[![VERSION](https://img.shields.io/badge/VERSION-0.3.5-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
 <img src="screenshots/sample.png" width="300" align="right" hspace="20">

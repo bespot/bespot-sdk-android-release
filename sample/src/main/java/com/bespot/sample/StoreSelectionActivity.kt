@@ -11,6 +11,7 @@ import androidx.lifecycle.whenCreated
 import com.bespot.sdk.sample.databinding.ActivityStoreSelectionBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class StoreSelectionActivity : AppCompatActivity() {
 
@@ -53,8 +54,9 @@ class StoreSelectionActivity : AppCompatActivity() {
             { error ->
                 snackbar?.dismiss()
                 error?.let {
-                    snackbar = Snackbar.make(binding.root, "Error! $error", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Retry") { model.fetch(this@StoreSelectionActivity) }
+                    snackbar =
+                        Snackbar.make(binding.root, "Error! $error", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Retry") { model.fetch(this@StoreSelectionActivity) }
                     snackbar?.show()
                 }
             }
@@ -62,6 +64,7 @@ class StoreSelectionActivity : AppCompatActivity() {
 
         // Setup status list
         adapter = StoreListAdapter {
+            Timber.d("Store selected ${it.code} ${it.uuid}")
             SessionActivity.start(this, it)
             finish()
         }

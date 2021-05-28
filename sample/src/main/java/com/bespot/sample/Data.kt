@@ -1,6 +1,8 @@
 package com.bespot.sample
 
 import android.location.Location
+import com.bespot.sdk.Beacon
+import com.bespot.sdk.Event
 import com.bespot.sdk.Status
 import com.bespot.sdk.StatusResult
 import com.bespot.sdk.Store
@@ -36,6 +38,45 @@ data class StatusWrapper(
         )
     }
 }
+
+interface AdapterItem
+
+data class EventWrapper(
+    val timestamp: Long = Date().time,
+    var beacons: List<BeaconWrapper>
+) : AdapterItem {
+
+    companion object {
+        fun fromEvent(event: Event) =
+            EventWrapper(
+                timestamp = event.timestamp,
+                beacons = event.beacons.map { BeaconWrapper.fromBeacon(it) }
+            )
+    }
+}
+
+data class BeaconWrapper(
+    var name: String,
+    var uuid: String,
+    var major: String,
+    var minor: String,
+    var rssi: Int,
+    var distance: Double
+) : AdapterItem {
+    companion object {
+        fun fromBeacon(beacon: Beacon) =
+            BeaconWrapper(
+                name = beacon.kontaktID ?: beacon.type.toString(),
+                uuid = beacon.uuid ?: beacon.eid ?: beacon.namespace + beacon.instanceId ?: "N/A",
+                major = beacon.major?.toString() ?: "N/A",
+                minor = beacon.minor?.toString() ?: "N/A",
+                rssi = beacon.rssi,
+                distance = beacon.distance
+            )
+    }
+}
+
+data class Header(val timestamp: String, val count: String) : AdapterItem
 
 data class StoreWrapper(
     val store: Store,
@@ -75,6 +116,7 @@ fun Failure.toText(): String {
         is StatusFailure.NoConfigurationFound -> "No Configuration Found"
         is StatusFailure.NoStoreReadings -> "No Store Readings"
         is StatusFailure.CloseDistance -> "Close Distance"
+        is StatusFailure.NoStatusCached -> "No cached status"
         is StatusFailure.IndoorDataModelNotFound -> "Indoor data model Not found"
         is Failure.BluetoothPermissionDenied -> "Bluetooth Permission Denied"
         is Failure.BluetoothDisabled -> "Bluetooth Disabled"

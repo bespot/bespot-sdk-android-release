@@ -1,12 +1,10 @@
 package com.bespot.sample
 
-import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.Manifest.permission.BLUETOOTH
-import android.Manifest.permission.BLUETOOTH_ADMIN
+import android.Manifest.permission.*
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bespot.sdk.Store
+import com.bespot.sdk.sample.BuildConfig
 import com.bespot.sdk.sample.R
 import com.bespot.sdk.sample.databinding.ActivityMainBinding
 import com.qifan.powerpermission.coroutines.awaitAskPermissionsAllGranted
@@ -14,6 +12,7 @@ import com.qifan.powerpermission.rationale.createDialogRationale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,11 +24,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Setup subscribe/unsubscribe button
-        binding.startSession.setOnClickListener { checkPermission(true) }
-        binding.pickStore.setOnClickListener { checkPermission(false) }
+        binding.startSession.setOnClickListener { checkPermission(Action.START_SESSION) }
+        binding.pickStore.setOnClickListener { checkPermission(Action.PICK_STORE) }
+        binding.startScanning.setOnClickListener { checkPermission(Action.SCAN) }
+        binding.version.text = BuildConfig.VERSION_NAME
     }
 
-    private fun checkPermission(noSessionMode: Boolean) {
+    private fun checkPermission(action: Action) {
         CoroutineScope(Dispatchers.Main).launch {
             val hasPermission = awaitAskPermissionsAllGranted(
                 permissions = arrayOf(ACCESS_FINE_LOCATION, BLUETOOTH, BLUETOOTH_ADMIN),
@@ -41,15 +42,29 @@ class MainActivity : AppCompatActivity() {
             )
 
             if (hasPermission) {
-                if (noSessionMode) {
-                    SessionActivity.start(this@MainActivity, null)
-                } else {
-                    StoreSelectionActivity.start(this@MainActivity)
+                when (action) {
+                    Action.PICK_STORE -> {
+                        Timber.d("Pick store button pressed")
+                        StoreSelectionActivity.start(this@MainActivity)
+                    }
+                    Action.SCAN -> {
+                        Timber.d("Scan button pressed")
+                        Toast.makeText(this@MainActivity, "Permissions denied!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    Action.START_SESSION -> {
+                        Timber.d("Start session button pressed")
+                        SessionActivity.start(this@MainActivity, null)
+                    }
                 }
             } else {
                 Toast.makeText(this@MainActivity, "Permissions denied!", Toast.LENGTH_SHORT)
                     .show()
             }
         }
+    }
+
+    enum class Action {
+        PICK_STORE, SCAN, START_SESSION
     }
 }
