@@ -1,8 +1,11 @@
+# 0.3.6 (2021-06-02)
+### Added
+- Configurations in Bespot.scanForBeacons().
 # 0.3.5 (2021-05-28)
 ### Fixed
 - Clearing the cached lastStatus value when subscription is terminated.
 ### Changed
-- When no readings received the SDK.subscribe() returns a StatusResult with OUT status value.
+- When no readings received the Bespot.subscribe() returns a StatusResult with OUT status value.
 - If an error has been occurred when the subscription is active then the SDK promotes the error status and closes the subscription.
 - Nullable config in subscribe()
 # 0.3.3 (2021-05-17)

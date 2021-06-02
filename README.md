@@ -1,6 +1,6 @@
 # Bespot Android SDK
 
-[![VERSION](https://img.shields.io/badge/VERSION-0.3.5-green)](#)
+[![VERSION](https://img.shields.io/badge/VERSION-0.3.6-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
 <img src="screenshots/sample.png" width="300" align="right" hspace="20">
@@ -61,7 +61,7 @@ Bespot.subscribe(object: StatusObserver {
     override fun onError(error: Failure) {
         // Handle error
     }
-})
+}, null, null)
 ```
 
 For the unsubscribe procedure use the `Bespot.unsubscribe`
@@ -92,7 +92,7 @@ Bespot.lastStatus(object: StatusObserver {
 
 #### Request for stores
 
-To receive the available stores, call the `Bestpo.getStores`.
+To receive the available stores, call the `Bespot.getStores`.
 
 ```kotlin
 Bespot.getStores(object: StoresCallback {

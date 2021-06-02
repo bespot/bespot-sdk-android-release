@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         // Setup subscribe/unsubscribe button
         binding.startSession.setOnClickListener { checkPermission(Action.START_SESSION) }
         binding.pickStore.setOnClickListener { checkPermission(Action.PICK_STORE) }
-        binding.startScanning.setOnClickListener { checkPermission(Action.SCAN) }
         binding.version.text = BuildConfig.VERSION_NAME
     }
 
