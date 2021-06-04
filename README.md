@@ -1,6 +1,6 @@
 # Bespot Android SDK
 
-[![VERSION](https://img.shields.io/badge/VERSION-0.3.6-green)](#)
+[![VERSION](https://img.shields.io/badge/VERSION-0.3.7-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
 <img src="screenshots/sample.png" width="300" align="right" hspace="20">
@@ -75,7 +75,7 @@ For the unsubscribe procedure use the `Bespot.unsubscribe`
 
 #### Request for last status
 
-When the last status of the device is needed, you can retreive it by calling the `Bespot.lastStatus`. This will return a `StatusResult` object.
+When the last status of the device is needed, you can retrieve it by calling the `Bespot.lastStatus`. This will return a `StatusResult` object.
 
 ```kotlin
 Bespot.lastStatus(object: StatusObserver {
@@ -132,7 +132,7 @@ Bespot.setUserID("user_id")
 
 ####  Failures
 
-Every `Observer` or `Callback` class has an `onError(error: Failure)` callback method that retreives an `Failure` object. 
+Every `Observer` or `Callback` class has an `onError(error: Failure)` callback method that retrieves an `Failure` object. 
 Check the error type by using the below structure:
 
 ```kotlin

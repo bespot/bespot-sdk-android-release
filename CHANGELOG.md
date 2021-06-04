@@ -1,3 +1,6 @@
+# 0.3.7 (2021-06-04)
+### Added
+- The API URL can now be configured in the Bespot.init call, by passing the URL in the "base_api_url" configuration parameter. If no such parameter is passed, sane defaults are used.   
 # 0.3.6 (2021-06-02)
 ### Added
 - Configurations in Bespot.scanForBeacons().
