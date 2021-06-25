@@ -1,3 +1,13 @@
+# 0.3.8 (2021-06-24)
+### Added
+- Check for init status in every public method.
+### Fixed
+- Unsubscribe bug fixed when timeout status is promoted.
+- Delayed results after unsubscribe fixed.
+- LastStatus state fixed when enable/disable GPS.
+- Minor internal fixes.
+### Changed
+- Remote logs optimisation.
 # 0.3.7 (2021-06-04)
 ### Added
 - The API URL can now be configured in the Bespot.init call, by passing the URL in the "base_api_url" configuration parameter. If no such parameter is passed, sane defaults are used.   
