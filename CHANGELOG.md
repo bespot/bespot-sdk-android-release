@@ -1,3 +1,8 @@
+# 0.3.9 (2021-07-22)
+### Fixed
+- Potential dexing issue with joda-time
+- Removed jcenter dependencies
+- An issue that would cause problems when attempting to scan for beacons before the bluetooth adapter is completely enabled
 # 0.3.8 (2021-06-24)
 ### Added
 - Check for init status in every public method.
