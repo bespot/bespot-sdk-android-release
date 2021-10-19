@@ -8,11 +8,7 @@
     <string name="no_store_mode">No Store Mode</string>
     <string name="no_store_mode_exp">No Store Mode (Exp)</string>
     <string name="no_store_mode_raw">No Store Mode (Raw)</string>
-    <string name="buff_value"> %+d</string>
     <string name="action_clear">Clear</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancel</string>
-    <string name="error_cannot_update_buff_value">Cannot update buffed readings on the fly. Please unsubscribe first</string>
-    <string name="error_buff_feature">Buff signal feature isn\'t available.</string>
-    <string name="buffed_reading_amount">%+d dB buff</string>
 </resources>

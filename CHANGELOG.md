@@ -1,3 +1,8 @@
+# 0.4.0 (2021-10-19)
+### Added
+- Added the AWAY status for the beacon timeout mechanism
+### Fixed
+- Potential issue with re-authenticating an expired token
 # 0.3.9 (2021-07-22)
 ### Fixed
 - Potential dexing issue with joda-time

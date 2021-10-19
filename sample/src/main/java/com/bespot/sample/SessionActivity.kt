@@ -7,22 +7,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
 import com.bespot.sdk.Store
 import com.bespot.sdk.sample.R
 import com.bespot.sdk.sample.databinding.ActivitySessionBinding
-import com.bespot.sdk.sample.databinding.DialogBuffReadingsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
-
-private const val MAX_BUFF_PICKER_VALUE = 80
-private const val MIN_BUFF_PICKER_VALUE = 0
-private const val DEFAULT_BUFF_VALUE = 0
-private const val OFFSET_BUFF_VALUE = -40
 
 class SessionActivity : AppCompatActivity() {
 
@@ -57,8 +50,7 @@ class SessionActivity : AppCompatActivity() {
 
         // binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         binding.lastStatus.setOnClickListener { onLabelPressed() }
-        binding.buffAmount.setOnClickListener { buffReadingsPressed() }
-
+ 
         setSupportActionBar(binding.toolbar)
         // Setup latest status
         model.lastStatusSDK.observe(this, ::showSDKLastStatus)
@@ -89,11 +81,6 @@ class SessionActivity : AppCompatActivity() {
                 }
             }
         )
-        model.buffValue().observe(this) { buffValue ->
-            binding.buffAmount.apply {
-                text = getString(R.string.buffed_reading_amount, buffValue ?: 0)
-            }
-        }
         // Setup status list
         adapter = StatusListAdapter()
         binding.list.adapter = adapter
@@ -140,58 +127,14 @@ class SessionActivity : AppCompatActivity() {
             android.R.id.home -> {
                 onBackPressed()
                 true
-            } else -> super.onOptionsItemSelected(item)
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
     override fun onDestroy() {
         model.unsubscribe()
         super.onDestroy()
-    }
-
-    private fun buffReadingsPressed() {
-        when {
-            !BUFF_SIGNAL_FEATURE_AVAILABLE -> {
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.error_buff_feature),
-                    Snackbar.LENGTH_LONG
-                )
-                    .setAnchorView(binding.buttonContainer)
-                    .show()
-            }
-            model.isSubscribed().value == true -> {
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.error_cannot_update_buff_value),
-                    Snackbar.LENGTH_LONG
-                )
-                    .setAnchorView(binding.buttonContainer)
-                    .show()
-            }
-            else -> {
-                val pickerViewBinding = DialogBuffReadingsBinding.inflate(layoutInflater)
-                with(pickerViewBinding.buffedValuePicker) {
-                    maxValue = MAX_BUFF_PICKER_VALUE
-                    minValue = MIN_BUFF_PICKER_VALUE
-                    wrapSelectorWheel = false
-                    value = model.buffValue().value.toPickerValue()
-                    setFormatter { unformattedValue -> "${unformattedValue.fromPickerValue()}" }
-                }
-
-                AlertDialog.Builder(this)
-                    .setView(pickerViewBinding.root)
-                    .setNegativeButton(getString(R.string.action_cancel)) { _, _ -> }
-                    .setPositiveButton(getString(R.string.action_ok)) { _, _ ->
-                        model.buffValue()
-                            .postValue(pickerViewBinding.buffedValuePicker.value.fromPickerValue())
-                    }
-                    .setNeutralButton(getString(R.string.action_clear)) { _, _ ->
-                        model.buffValue().postValue(null)
-                    }
-                    .show()
-            }
-        }
     }
 
     private fun onLabelPressed() {
@@ -258,11 +201,3 @@ class SessionActivity : AppCompatActivity() {
             .show()
     }
 }
-
-private fun Int?.toPickerValue() = if (this == null) {
-    DEFAULT_BUFF_VALUE - OFFSET_BUFF_VALUE
-} else {
-    this - OFFSET_BUFF_VALUE
-}
-
-private fun Int.fromPickerValue() = this + OFFSET_BUFF_VALUE
