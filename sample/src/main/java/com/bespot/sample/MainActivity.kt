@@ -1,8 +1,10 @@
 package com.bespot.sample
 
 import android.Manifest.permission.*
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bespot.sdk.sample.BuildConfig
 import com.bespot.sdk.sample.R
@@ -13,6 +15,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+
+@RequiresApi(Build.VERSION_CODES.S)
+private val ANDROID_S_PERMISSIONS =
+    arrayOf(BLUETOOTH_SCAN, BLUETOOTH_CONNECT, ACCESS_FINE_LOCATION, BLUETOOTH_ADMIN)
+private val LEGACY_ANDROID_PERMISSIONS =
+    arrayOf(BLUETOOTH, ACCESS_FINE_LOCATION, BLUETOOTH_ADMIN)
+private val requiredPermissions =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) ANDROID_S_PERMISSIONS else LEGACY_ANDROID_PERMISSIONS
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkPermission(action: Action) {
         CoroutineScope(Dispatchers.Main).launch {
             val hasPermission = awaitAskPermissionsAllGranted(
-                permissions = arrayOf(ACCESS_FINE_LOCATION, BLUETOOTH, BLUETOOTH_ADMIN),
+                permissions = requiredPermissions,
                 rationaleDelegate = createDialogRationale(
                     R.string.permission_prompt_title,
                     listOf(ACCESS_FINE_LOCATION, BLUETOOTH, BLUETOOTH_ADMIN),

@@ -1,3 +1,9 @@
+# 0.4.1 (2021-11-12)
+### Added
+- Support Android-12
+### Fixed
+- R8 optimisation issue in the AppAuthenticationUseCase
+- Socket timeouts are now mapped as Network Connection failure and sanitised network timeout values
 # 0.4.0 (2021-10-19)
 ### Added
 - Added the AWAY status for the beacon timeout mechanism
