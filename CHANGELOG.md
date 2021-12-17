@@ -1,3 +1,9 @@
+# 0.4.2 (2021-12-17)
+### Added
+- Added StoreFailure.NoStoreFound and StoreFailure.StoreUnderMaintenance errors.
+### Changed
+- Less Failure.NotInitialized errors promoted by waiting when the initialization is in progress.
+- Default bluetooth scanning interval time to 2sec.
 # 0.4.1 (2021-11-12)
 ### Added
 - Support Android-12
