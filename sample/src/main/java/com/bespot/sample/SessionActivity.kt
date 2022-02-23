@@ -58,7 +58,6 @@ class SessionActivity : AppCompatActivity() {
                 InOutStatus.ERROR -> {
                     binding.lastStatus.setChipBackgroundColorResource(R.color.status_error)
                     binding.lastStatus.setChipIconResource(R.drawable.ic_status_error)
-                    model.unsubscribe()
                 }
                 else -> {
                     // binding.lastStatus.setChipBackgroundColorResource(R.color.status_unknown)
