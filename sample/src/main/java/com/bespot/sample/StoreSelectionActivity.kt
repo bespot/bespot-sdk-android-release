@@ -50,17 +50,16 @@ class StoreSelectionActivity : AppCompatActivity() {
 
         // Listen for errors
         model.error().observe(
-            this,
-            { error ->
-                snackbar?.dismiss()
-                error?.let {
-                    snackbar =
-                        Snackbar.make(binding.root, "Error! $error", Snackbar.LENGTH_INDEFINITE)
-                            .setAction("Retry") { model.fetch(this@StoreSelectionActivity) }
-                    snackbar?.show()
-                }
+            this
+        ) { error ->
+            snackbar?.dismiss()
+            error?.let {
+                snackbar =
+                    Snackbar.make(binding.root, "Error! $error", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Retry") { model.fetch(this@StoreSelectionActivity) }
+                snackbar?.show()
             }
-        )
+        }
 
         // Setup status list
         adapter = StoreListAdapter {
@@ -71,12 +70,11 @@ class StoreSelectionActivity : AppCompatActivity() {
         binding.list.adapter = adapter
 
         model.stores().observe(
-            this,
-            {
-                adapter.submitList(it)
-                adapter.notifyDataSetChanged()
-                binding.list.scrollToPosition(adapter.itemCount - 1)
-            }
-        )
+            this
+        ) {
+            adapter.submitList(it)
+            adapter.notifyDataSetChanged()
+            binding.list.scrollToPosition(adapter.itemCount - 1)
+        }
     }
 }

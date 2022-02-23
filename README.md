@@ -1,11 +1,11 @@
 # Bespot Android SDK
 
-[![VERSION](https://img.shields.io/badge/VERSION-0.4.2-green)](#)
+[![VERSION](https://img.shields.io/badge/VERSION-0.5.0-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
 <img src="screenshots/sample.png" width="300" align="right" hspace="20">
 
-Bespot Android SDK offers indoor location tracking and analytics reporting to 3rd party apps using BLE technology and Machine Learning.
+[Bespot](https://bespot.com/) Android SDK offers indoor location tracking and analytics reporting to 3rd party apps using BLE technology and Machine Learning.
 
 ## Features
 
@@ -68,9 +68,9 @@ For the unsubscribe procedure use the `Bespot.unsubscribe`
 
 ```kotlin
  override fun onPause() {
-        Bespot.unsubscribe()
-        super.onDestroy()
-    }
+    Bespot.unsubscribe()
+    super.onDestroy()
+}
 ```
 
 #### Request for last status
@@ -79,15 +79,15 @@ When the last status of the device is needed, you can retrieve it by calling the
 
 ```kotlin
 Bespot.lastStatus(object: StatusObserver {
-                override fun onStatusUpdate(status: StatusResult) {
-                    // Handle status
-                }
+    override fun onStatusUpdate(status: StatusResult) {
+        // Handle status
+    }
 
-                override fun onError(error: Failure) {
-                   // Handle error
-                }
+    override fun onError(error: Failure) {
+        // Handle error
+    }
 
-            })
+})
 ```
 
 #### Request for stores
@@ -96,14 +96,14 @@ To receive the available stores, call the `Bespot.getStores`.
 
 ```kotlin
 Bespot.getStores(object: StoresCallback {
-                override fun onStoreReceived(stores: List<Store>) {
-                     // Handle available stores
-                }
+    override fun onStoreReceived(stores: List<Store>) {
+        // Handle available stores
+    }
 
-                override fun onError(error: Failure) {
-                    // Handle error
-                }
-            })
+    override fun onError(error: Failure) {
+        // Handle error
+    }
+})
 ```
 
 #### Request for store information
@@ -112,14 +112,14 @@ You can request for information about a store by using the `Bespot.getStore` met
 
 ```kotlin
 Bespot.getStore("store_id", object: StoreCallback {
-                override fun onStoreReceived(store: Store) {
-                     // Handle store details
-                }
+    override fun onStoreReceived(store: Store) {
+        // Handle store details
+    }
 
-                override fun onError(error: Failure) {
-                    // Handle error
-                }
-            })
+    override fun onError(error: Failure) {
+        // Handle error
+    }
+})
 ```
 
 #### Add User Identifier
@@ -132,18 +132,27 @@ Bespot.setUserID("user_id")
 
 ####  Failures
 
-Every `Observer` or `Callback` class has an `onError(error: Failure)` callback method that retrieves an `Failure` object. 
-Check the error type by using the below structure:
+Every `Observer` or `Callback` class has an `onError(error: Failure)` callback method that retrieves an `Failure` object.
+Find the a description list for each error in [Bespot SDK official documentations](https://docs.opap-dev.bespot.io/sdk/errors/).
+Also check all the available errors in `Failure` sealed class. Those errors can by resolved with a `when()` operator as is shown below
 
 ```kotlin
 when (error) {
-        is StatusFailure.NoConfigurationFound -> // No Configuration Found
-        is StatusFailure.NoStoreReadings -> // No Store Readings
-        is StatusFailure.CloseDistance -> // Close Distance"
-        is StatusFailure.IndoorDataModelNotFound -> // Indoor data model Not found
-        // Add all the Failure Cases
-        else -> // Unhandleable error 
-    }
+    is StatusFailure.NoStoreReadings -> // No store readings
+    is StatusFailure.NoStatusCached -> // Νο cached status
+    is StatusFailure.IndoorDataModelNotFound -> // Indoor data model Not found
+    is StoreFailure.StoreUnderMaintenance -> // Store is under maintenance. In/Out status is unavailable
+    is Failure.BluetoothPermissionDenied ->  // Bluetooth Permission Denied
+    is Failure.BluetoothDisabled ->  // Bluetooth Disabled
+    is Failure.LocationPermissionDenied ->  // Location Permission Denied
+    is Failure.NetworkConnection -> // Connection error
+    is Failure.NotInitialized ->  // SDK isn't initialized
+    is Failure.ServerError -> // Remote server error
+    is Failure.FeaturePermissionDenied ->  // Feature is not available
+    is Failure.NoLocationOrReadingsData ->  // No location or readings data provided to resolve to a store
+    is Failure.DeviceNotSupported -> // Device is not supported
+    else -> // Unhandleable error 
+}
 ```
 
 ## Support
@@ -153,3 +162,4 @@ If you find a bug please fill out an [issue report](https://gitlab.com/bespot/be
 ## License
 
 (C) Copyright 2020-2021 Bespot P.C. All rights reserved. See `LICENSE` for more information.
+[Bespot](https://bespot.com/) Location tracking to drive growth, profitability and customer engagement

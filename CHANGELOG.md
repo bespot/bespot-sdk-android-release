@@ -1,3 +1,16 @@
+# 0.5.0 (2022-02-23)
+### Added
+- Added Failure.DeviceNotSupported, NoActiveAccountFound, FailureNoLocationOrReadingsData errors.
+- System observers for Location services, Bluetooth availability, User permissions and network providers.
+### Fixed
+- When bluetooth or location is turned off, SDK promotes an Failure and waits to be available again.
+- Fixed the wrong AWAY status promotion when location providers were disabled.
+- When initialisation process is pending, all the other functions are waiting the process to be completed and then they start as expected without promoting any error.
+### Changed
+- From now no errors are fatal for the subscription. SDK keeps the subscription alive by waiting and observing device environmental problems to be resolved.
+### Removed
+- Removed NoConfigurationFound, CloseDistance, NoStoreForID errors.
+- Removed Status.UNVERIFIED enum value.
 # 0.4.2 (2021-12-17)
 ### Added
 - Added StoreFailure.NoStoreFound and StoreFailure.StoreUnderMaintenance errors.

@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.bespot.sdk.sample.BuildConfig
+import com.bespot.sdk.BuildConfig
 import com.bespot.sdk.sample.R
 import com.bespot.sdk.sample.databinding.ActivityMainBinding
 import com.qifan.powerpermission.coroutines.awaitAskPermissionsAllGranted
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         // Setup subscribe/unsubscribe button
         binding.startSession.setOnClickListener { checkPermission(Action.START_SESSION) }
         binding.pickStore.setOnClickListener { checkPermission(Action.PICK_STORE) }
-        binding.version.text = BuildConfig.VERSION_NAME
+        binding.version.text = "SDK version: " + BuildConfig.VERSION_NAME
     }
 
     private fun checkPermission(action: Action) {

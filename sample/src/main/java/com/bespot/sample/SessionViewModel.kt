@@ -14,16 +14,6 @@ class SessionViewModel : ViewModel(), StatusObserver {
 
     private val isSubscribed = MutableLiveData<Boolean>().apply { value = false }
 
-    var type = 0
-        set(type) {
-            when (type) {
-                0 -> Bespot.changeToVerifiedStatus()
-                1 -> Bespot.changeToExperimentalStatus()
-                2 -> Bespot.changeToRawStatus()
-            }
-            field = type
-        }
-
     fun isSubscribed(): LiveData<Boolean> = isSubscribed
 
     private val statusList = MutableLiveData<List<StatusWrapper>>().apply {
@@ -75,9 +65,6 @@ class SessionViewModel : ViewModel(), StatusObserver {
 
     private fun handleStatus(status: StatusWrapper) {
         lastStatus.postValue(status)
-        if (type == 0 && status.status == InOutStatus.UNVERIFIED) {
-            return
-        }
         val items = statusList.value as ArrayList
         items.add(status)
         items.sortedBy { status.timestamp }
