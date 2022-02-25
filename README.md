@@ -157,8 +157,8 @@ when (error) {
 
 ####  Migration from v0.4.x to v0.5.x
 
-Since v.0.5.0, there is no need to call the unsubscribe method when an error is thrown, and then call the subscribe function to get again In/Out Status.
-Also when you receive an error from the Callback you should add a when expression to check which error it is and map it accordingly.
+Since v.0.5.0, there is no need to call the `Bespot.unsubscribe` method when an error is thrown, and then call the subscribe function to get again In/Out status.
+Also when you receive an error from the 'Callback' you should add a `when()` operator to check which error it is and map it accordingly.
 
 ## Support
 
