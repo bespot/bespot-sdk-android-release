@@ -155,6 +155,11 @@ when (error) {
 }
 ```
 
+####  Migration from v0.4.x to v0.5.x
+
+Since v.0.5.0, there is no need to call the unsubscribe method when an error is thrown, and then call the subscribe function to get again In/Out Status.
+Also when you receive an error from the Callback you should add a when expression to check which error it is and map it accordingly.
+
 ## Support
 
 If you find a bug please fill out an [issue report](https://gitlab.com/bespot/bespot-sdk-android-release/-/issues) or contact us at [dev@bespot.com](dev@bespot.com)
