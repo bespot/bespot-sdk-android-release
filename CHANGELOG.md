@@ -1,3 +1,19 @@
+# 0.5.4 (2023-06-01)
+### Added
+- Introduced telemetry data updates through Bespot SDK
+# 0.5.3 (2023-01-10)
+### Added
+- Added an internal mechanism for network self-healing
+- Support R8 Full Mode
+# 0.5.2 (2022-08-17)
+### Added
+- Added new supported metadata fields
+# 0.5.1 (2022-05-04)
+### Added
+- Updated internal library dependencies
+- Added new supported metadata fields
+### Fixed
+- Fixed sending all the metadata fields in all the status calls not just in the session start call
 # 0.5.0 (2022-02-23)
 ### Added
 - Added Failure.DeviceNotSupported, NoActiveAccountFound, FailureNoLocationOrReadingsData errors.
