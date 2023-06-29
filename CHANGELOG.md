@@ -1,3 +1,7 @@
+# 0.5.5 (2023-06-27)
+### Added
+- Exposed setAltUserId function for setting an alternative user ID.
+- Updated Bespot Artifactory repository Maven url.
 # 0.5.4 (2023-06-01)
 ### Added
 - Introduced telemetry data updates through Bespot SDK

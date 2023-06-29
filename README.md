@@ -1,6 +1,6 @@
 # Bespot Android SDK
 
-[![VERSION](https://img.shields.io/badge/VERSION-0.5.4-green)](#)
+[![VERSION](https://img.shields.io/badge/VERSION-0.5.5-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
 <img src="screenshots/sample.png" width="300" align="right" hspace="20">
@@ -21,7 +21,7 @@ Add the Bespot Artifactory repository to your root `build.gradle`.
 ```gradle
 allprojects {
     repositories {
-        maven {url 'https://bespot.jfrog.io/artifactory/bespot-sdk-android/'}
+        maven {url 'https://artifactory.bespot.com/artifactory/bespot-sdk-android/'}
     }
 }
 ```
@@ -128,6 +128,14 @@ You can add a user unique Identifier to keep track the user's session.
 
 ```kotlin
 Bespot.setUserID("user_id")
+```
+
+#### Add Alternative User Identifier
+
+You can also add an alternative user unique Identifier to keep track of the user's session
+
+```kotlin
+Bespot.setAltUserID("alternative_user_id")
 ```
 
 ####  Failures

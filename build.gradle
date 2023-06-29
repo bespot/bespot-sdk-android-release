@@ -19,7 +19,7 @@ allprojects {
         google()
         jcenter()
         maven {
-            url 'https://bespot.jfrog.io/artifactory/bespot-sdk-android/'
+            url 'https://artifactory.bespot.com/artifactory/bespot-sdk-android/'
         }
     }
 }
