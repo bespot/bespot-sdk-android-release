@@ -1,3 +1,6 @@
+# 0.5.6 (2023-11-16)
+### Added
+- Added support for Android 14
 # 0.5.5 (2023-06-27)
 ### Added
 - Exposed setAltUserId function for setting an alternative user ID.
