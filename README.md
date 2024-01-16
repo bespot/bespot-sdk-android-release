@@ -1,6 +1,6 @@
 # Bespot Android SDK
 
-[![VERSION](https://img.shields.io/badge/VERSION-0.5.6-green)](#)
+[![VERSION](https://img.shields.io/badge/VERSION-0.5.7-green)](#)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](#)
 
 <img src="screenshots/sample.png" width="300" align="right" hspace="20">
@@ -159,6 +159,7 @@ when (error) {
     is Failure.FeaturePermissionDenied ->  // Feature is not available
     is Failure.NoLocationOrReadingsData ->  // No location or readings data provided to resolve to a store
     is Failure.DeviceNotSupported -> // Device is not supported
+    is ServiceUnavailableError.OutsideBusinessHours -> // Outside business hours
     else -> // Unhandleable error 
 }
 ```
