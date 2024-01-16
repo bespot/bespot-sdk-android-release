@@ -1,3 +1,6 @@
+# 0.5.7 (2024-01-16)
+- Added `ServiceUnavailableError.OutsideBusinessHours`
+- Updated dependencies
 # 0.5.6 (2023-11-16)
 ### Added
 - Added support for Android 14
