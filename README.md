@@ -175,5 +175,5 @@ If you find a bug please fill out an [issue report](https://gitlab.com/bespot/be
 
 ## License
 
-(C) Copyright 2020-2021 Bespot P.C. All rights reserved. See `LICENSE` for more information.
+(C) Copyright 2020-2024 Bespot P.C. All rights reserved. See `LICENSE` for more information.
 [Bespot](https://bespot.com/) Location tracking to drive growth, profitability and customer engagement
