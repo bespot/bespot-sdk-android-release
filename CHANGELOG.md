@@ -1,3 +1,6 @@
+# 0.5.8 (2025-09-17)
+### Added
+- Secure access and refresh token storage
 # 0.5.7 (2024-01-16)
 - Added `ServiceUnavailableError.OutsideBusinessHours`
 - Updated dependencies
