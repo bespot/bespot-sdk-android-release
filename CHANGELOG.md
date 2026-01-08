@@ -1,3 +1,6 @@
+# 0.5.9 (2026-01-08)
+### Removed
+- Removed global options from consumer proguard rules
 # 0.5.8 (2025-09-17)
 ### Added
 - Secure access and refresh token storage
